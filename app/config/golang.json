@@ -1,0 +1,10 @@
+{
+    "boilr": "golang",
+    "header": {
+        "name": "Golang",
+        "title": "",
+        "color": "#42A9D4",
+        "badges": ["Back-end", "Web", "System"]
+    },
+    "options": []
+}

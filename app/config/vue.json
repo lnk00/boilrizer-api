@@ -1,0 +1,10 @@
+{
+    "boilr": "vue",
+    "header": {
+        "name": "Vue",
+        "title": "",
+        "color": "#5EB686",
+        "badges": ["Javascript", "Front-end", "Web", "frameworks"]
+    },
+    "options": []
+}

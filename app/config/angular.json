@@ -1,0 +1,101 @@
+{
+  "boilr": "angular",
+  "header": {
+    "name": "Angular",
+    "title": "",
+    "color": "#C92C34",
+    "badges": ["Typescript", "Front-end", "Web", "frameworks"]
+  },
+  "options": [
+    {
+      "type": "dropdown",
+      "name": "style",
+      "label": "Style",
+      "tooltip": "The file extension or preprocessor to use for style files.",
+      "items": [
+        {
+          "label": "css",
+          "active": true
+        },
+        {
+          "label": "scss",
+          "active": false
+        },
+        {
+          "label": "sass",
+          "active": false
+        },
+        {
+          "label": "less",
+          "active": false
+        },
+        {
+          "label": "styl",
+          "active": false
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "name": "inlineStyle",
+      "label": "Inline Style",
+      "tooltip": "When true, includes styles inline in the component TS file. By default, an external styles file is created and referenced in the component TS file.",
+      "item": false
+    },
+    {
+      "type": "checkbox",
+      "name": "inlineTemplate",
+      "label": "Inline Template",
+      "tooltip": "When true, includes template inline in the component TS file. By default, an external template file is created and referenced in the component TS file.",
+      "item": false
+    },
+    {
+      "type": "break"
+    },
+    {
+      "type": "dropdown",
+      "name": "manager",
+      "label": "Package Manager",
+      "items": [
+        {
+          "label": "npm",
+          "active": true
+        },
+        {
+          "label": "yarn",
+          "active": false
+        },
+        {
+          "label": "pnpm",
+          "active": false
+        },
+        {
+          "label": "cnpm",
+          "active": false
+        }
+      ],
+      "tooltip": "The package manager used to install dependencies."
+    },
+    {
+      "type": "checkbox",
+      "name": "minimal",
+      "label": "Minimal",
+      "tooltip": "When true, creates a workspace without any testing frameworks. (Use for learning purposes only.)",
+      "item": false
+    },
+    {
+      "type": "checkbox",
+      "name": "routing",
+      "label": "Routing",
+      "tooltip": "When true, generates a routing module for the initial project.",
+      "item": false
+    },
+    {
+      "type": "checkbox",
+      "name": "legacyBrowsers",
+      "label": "Legacy Browsers",
+      "tooltip": "Add support for legacy browsers like Internet Explorer using differential loading.",
+      "item": false
+    }
+  ]
+}

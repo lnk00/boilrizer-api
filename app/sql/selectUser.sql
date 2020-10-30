@@ -1,0 +1,1 @@
+SELECT * FROM users WHERE githubid = $1

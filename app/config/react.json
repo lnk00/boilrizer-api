@@ -1,0 +1,10 @@
+{
+  "boilr": "react",
+  "header": {
+    "name": "React",
+    "title": "",
+    "color": "#7BD7F8",
+    "badges": ["Javascript", "Front-end", "Web", "frameworks"]
+  },
+  "options": []
+}
