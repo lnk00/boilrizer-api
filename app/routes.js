@@ -8,6 +8,7 @@ const routeRegister = (router, passport) => {
 
   router.get('/v1/popular', Boilr.getPopularBoilr.bind(this));
   router.post('/v1/config', Boilr.getConfig.bind(this));
+  router.post('/v1/create', Boilr.create.bind(this));
 };
 
 export default routeRegister;

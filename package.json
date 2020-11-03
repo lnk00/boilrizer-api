@@ -6,6 +6,7 @@
   "scripts": {
     "create-dev-tables": "node -r esm app/db/config.js --create-tables",
     "drop-dev-tables": "node -r esm app/db/config.js --drop-tables",
+    "build-lib": "wasm-pack build",
     "start": "nodemon -r esm server.js"
   },
   "nodemonConfig": {

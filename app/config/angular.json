@@ -1,5 +1,6 @@
 {
   "boilr": "angular",
+  "cli": true,
   "header": {
     "name": "Angular",
     "title": "",

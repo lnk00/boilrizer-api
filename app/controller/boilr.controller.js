@@ -1,5 +1,9 @@
 import query from '../db/query';
 import fs from 'fs';
+import cliService from '../service/cli.service';
+import zipperService from '../service/zipper.service';
+import send from 'koa-send';
+import { exec } from 'child_process';
 
 export default {
   async getPopularBoilr(ctx) {
@@ -18,5 +22,20 @@ export default {
     }
 
     ctx.body = config;
+  },
+
+  async create(ctx) {
+    let config = ctx.request.body.config;
+
+    ctx.res.once('finish', () => {
+      exec(`rm -rf ${config.header.title}*`, { cwd: './tmp' });
+    });
+
+    if (config.cli) await cliService.create(config);
+    await zipperService.zip(config.header.title);
+
+    const path = `./tmp/${config.header.title}.zip`;
+    ctx.attachment(path);
+    await send(ctx, path);
   },
 };
