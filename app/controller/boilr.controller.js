@@ -47,6 +47,10 @@ export default {
     let res = await query('selectUser.sql', [secret.data.id]);
     let user = res.rows[0];
 
+    ctx.res.once('finish', () => {
+      exec(`rm -rf ${config.header.title}*`, { cwd: './tmp' });
+    });
+
     if (config.cli) await cliService.create(config);
     await githubService.createRepository(config.header.title, user);
     await githubService.createPullRequest(config.header.title, user);
