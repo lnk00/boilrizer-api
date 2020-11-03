@@ -4,6 +4,8 @@ import cliService from '../service/cli.service';
 import zipperService from '../service/zipper.service';
 import send from 'koa-send';
 import { exec } from 'child_process';
+import githubService from '../service/github.service';
+import * as jwt from 'jsonwebtoken';
 
 export default {
   async getPopularBoilr(ctx) {
@@ -24,7 +26,7 @@ export default {
     ctx.body = config;
   },
 
-  async create(ctx) {
+  async download(ctx) {
     let config = ctx.request.body.config;
 
     ctx.res.once('finish', () => {
@@ -37,5 +39,23 @@ export default {
     const path = `./tmp/${config.header.title}.zip`;
     ctx.attachment(path);
     await send(ctx, path);
+  },
+
+  async upload(ctx) {
+    let config = ctx.request.body.config;
+    let secret = jwt.verify(ctx.request.body.secret, process.env.JWT_SECRET);
+    let res = await query('selectUser.sql', [secret.data.id]);
+    let user = res.rows[0];
+
+    if (config.cli) await cliService.create(config);
+    await githubService.createRepository(config.header.title, user);
+    await githubService.createPullRequest(config.header.title, user);
+    await githubService.mergePullRequest(config.header.title, user);
+    let repositoryInfos = await githubService.getRepository(config.header.title, user);
+
+    ctx.body = {
+      ssh_url: repositoryInfos.data.ssh_url,
+      html_url: repositoryInfos.data.html_url,
+    };
   },
 };

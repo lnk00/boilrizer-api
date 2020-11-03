@@ -7,7 +7,12 @@ const checkUser = (data, profile, done) => {
     query('updateUserToken.sql', [profile.token, profile.id]);
     return done(null, user);
   } else {
-    let newUser = query('insertUser.sql', [profile._json.email, profile.id, accessToken, profile.username]);
+    let newUser = query('insertUser.sql', [
+      profile._json.email !== null ? profile._json.email : '',
+      profile.id,
+      profile.token,
+      profile.username,
+    ]);
     return done(null, newUser);
   }
 };
