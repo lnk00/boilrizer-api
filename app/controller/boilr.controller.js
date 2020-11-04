@@ -6,6 +6,7 @@ import send from 'koa-send';
 import { exec } from 'child_process';
 import githubService from '../service/github.service';
 import * as jwt from 'jsonwebtoken';
+import tokenService from '../service/token.service';
 
 export default {
   async getPopularBoilr(ctx) {
@@ -43,9 +44,14 @@ export default {
 
   async upload(ctx) {
     let config = ctx.request.body.config;
-    let secret = jwt.verify(ctx.request.body.secret, process.env.JWT_SECRET);
-    let res = await query('selectUser.sql', [secret.data.id]);
-    let user = res.rows[0];
+
+    let user = await tokenService.getUser(ctx.request.body.secret);
+    if (user === null) {
+      ctx.body = {
+        redirect: `${process.env.APP_URL}signin/`,
+      };
+      return;
+    }
 
     ctx.res.once('finish', () => {
       exec(`rm -rf ${config.header.title}*`, { cwd: './tmp' });
